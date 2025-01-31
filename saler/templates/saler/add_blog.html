@@ -1,0 +1,118 @@
+{% extends 'saler/base.html' %}
+{% block saler_head %}
+{% endblock saler_head %}
+{% load crispy_forms_tags %}
+{% block saler_body %}
+<div class="container">
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-{{message.tags}}">{{ message }}</div>
+	{% endfor %}
+	{% endif %}
+	<h1 style="text-align: center; letter-spacing: 1px; font-family: Sans-Serif Fonts; font-weight: bolder;">Add Blog
+	</h1>
+	<form method="post" enctype="multipart/form-data">{% csrf_token %}
+		<div class="row">
+			<div class="col-md">
+				<div class="form-group">
+					<label for="BlogTitle">Blog Title</label>
+					<input type="text" class="form-control" id="BlogTitle" name="blog_title"
+						placeholder="Enter Blog Title" required>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="category">Category</label>
+			<select class="form-control" id="category" name="category" required>
+				<option value="">Select Category</option>
+				<option value="Women's Fashion">Women's Fashion</option>
+				<option value="Men's Fashion">Men's Fashion</option>
+				<!-- Add more options for different categories as needed -->
+			</select>
+		</div>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Description</span>
+					</div>
+					<textarea class="form-control" rows="1" aria-label="With textarea" name="desc"></textarea>
+				</div><br>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Description</span>
+							</div>
+							<textarea class="form-control" rows="1" aria-label="With textarea" name="desc2" required></textarea>
+						</div><br>
+				<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">Description</span>
+							</div>
+							<textarea class="form-control" rows="1" aria-label="With textarea" name="desc3" required></textarea>
+						</div>
+			</div>
+		</div>
+		<label for="ProductName">Images</label>
+		<div class="row">
+			<div class="col-md">
+				<input type="file" name="image1" accept="image/*" class="clearablefileinput form-control" required>
+			</div>
+			<div class="col-md">
+				<input type="file" name="image2" accept="image/*" class="clearablefileinput form-control" required>
+			</div>
+			<div class="col-md">
+				<input type="file" name="image3" accept="image/*" class="clearablefileinput form-control" required>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary mt-3" style="background-color: #be2714; border: none; width: 100%;">Add</button>
+	</form>
+</div>
+<hr class="mr-5 ml-5 pb-2">
+<div class="container">
+	<h5 style="text-align: center; font-weight: bold;">Your Blogs! </h5>
+	<div style="max-height: 420px; overflow-y: scroll;">
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Blog Id</th>
+					<th scope="col">Blog Title</th>
+					<th scope="col">Content</th>
+					<th scope="col" style="text-align: right;"><i class="fa fa-trash" aria-hidden="true"></i></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for pr in prod %}
+				<tr>
+					<th scope="row">{{pr.blog_id}}</th>
+					<td>{{pr.blog_title}}</td>
+					<td>{{pr.desc}}</td>
+					<form>
+						<input type="text" name="blog_id" value="{{pr.blog_id}}" readonly style="display: none;">
+						<td style="text-align: right;"><button type="submit" class="btn" style="margin: 0;padding: 0"><i
+									class="fa fa-trash" aria-hidden="true"></i></button></td>
+
+					</form>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<script>
+	var sq = 1;
+	function addsizequn() {
+		let elm = document.createElement('div');
+		document.getElementById('pls').remove();
+		sq++;
+		elm.className = 'col-sm-2';
+		elm.innerHTML = `<div class="input-group">
+					  <input type="text" aria-label="Size" class="form-control" placeholder="Size" name="size${sq}">
+					  <input type="number" aria-label="Quantity" class="form-control" placeholder="Quantity" name="quantity${sq}">
+					</div>
+					<i class="fa fa-plus-circle pt-1" aria-hidden="true" style="font-size: 30px;" onclick="addsizequn()" id='pls'></i>`;
+		sub = document.getElementById('sizes');
+		sub.appendChild(elm);
+		document.getElementById('size_no').value = sq;
+	}
+</script>
+{% endblock saler_body %}

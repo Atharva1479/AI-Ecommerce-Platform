@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% block main_head %}
+{% load static %}
+
+
+{% endblock main_head %}
+{% block main_body %}
+<div class="container contact">
+    <h1  style="text-align: center; font-family: 'Times New Roman', Times, serif;">{{blog.blog_title}}</h1>
+      <div class="col-12">
+            <p style="text-align: center; font-family:system-ui">{{blog.desc}} </p>
+        </div>
+    <div class="row col-lg-12 mt-5 mx-auto">
+                <img class="img-fluid" src="{{blog.image1.url}}" alt="{{blog.image1.url}}" >
+          </div>
+          <div class="col-12">
+            <p style="font-family:system-ui"> <br>{{blog.desc2}} </p>
+        </div>
+        <div class="row col-lg-12 mt-5 mx-auto">
+        
+                <img class="img-fluid" src="{{blog.image2.url}}" alt="{{blog.image2.url}}" >
+          
+                <div class="col-12">
+                    <p style="font-family:system-ui"> <br>{{blog.desc3}} </p>
+                </div>
+        </div>
+            
+        <div class="row col-lg-12 mt-5 mx-auto">
+   
+                <img class="img-fluid" src="{{blog.image3.url}}" alt="{{blog.image3.url}}" >
+        </div>
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="{% url 'blogs' %}" class="btn btn-dark">Show All Blogs</a>
+        </div>
+                
+        </div>
+    
+</div>
+{% endblock main_body %}
